@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Effect07 - JavaScript</title>
+    <style>
+        /* reset */
+        @font-face { 
+            font-family: 'NEXON Lv1 Gothic OTF'; 
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+            font-weight: normal; 
+            font-style: normal; 
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.2s;
+        }
+
+        a:hover {
+            border-bottom: 1px dashed #fff;
+        }
+
+        img {
+            width: 100%;
+            vertical-align: top;
+        }
+
+        ul {
+            padding: 10px 20px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        body {
+            color: #fff;
+            height: 100vh;
+            transition: all 0.2s;
+            overflow: hidden;
+            font-size: 16px;
+            line-height: 1.5;
+            font-family: 'NEXON Lv1 Gothic OTF';
+            cursor: none;
+        }
+
+        /* body::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(13, 28, 3, 0.9);
+            z-index: -1;
+        } */
+
+        /* info */
+        .info {
+            position: absolute;
+            z-index: 1000;
+        }
+
+        .info h1 {
+            font-size: 20px;
+            border-bottom: 1px dashed #fff;
+            margin-bottom: 8px;
+        }
+
+        .info p, .info li {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 3px;
+        }
+
+        .info li.active a:last-child {
+            background: #fff;
+            color: #000;
+        }
+
+        .info.left {
+            left: 20px;
+            top: 20px;
+        }
+
+        .info.right {
+            right: 10px;
+            top: 10px;
+        }
+
+        .info.right a {
+            display: inline-block;
+            margin-left: 5px;
+            width: 20px; height: 20px;
+            border: 1px dashed #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .info.right a:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .info.bottom {
+            left: 10px;
+            bottom: 10px;
+        }
+
+        .info.bottom li {
+            display: block;
+            transition: all 0.2s;
+        }
+
+        .info.bottom li.active {
+            color: orange;
+        }
+
+        .info.bottom li:hover {
+            color: orange;
+        }
+
+        .info.view {
+            right: 20px;
+            bottom: 20px;
+        }
+
+        .info.view a {
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 30px;
+            padding: 5px 30px;
+        }
+
+        @media (max-width: 800px){
+            .info.bottom {display: none;}
+            .info.right {display: none;}
+        }
+
+        /* main */
+        .contents {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .contents p {
+            max-width: 70vw;
+            font-size: 3vw;
+            text-align: justify;
+        }
+        .contents p:first-child {
+            font-size: 2vw;
+            line-height: 2;
+        }
+
+        .contents p em {
+            color: orange;
+            border-bottom: 2px dashed orange;
+            font-style: normal;
+        }
+        .cover_wrap {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            overflow: hidden;
+            background: url(assets/img/sc08@2.jpg) no-repeat center center;
+        }
+        #svg-mask {
+            position: fixed;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            fill: rgba(13, 28, 3, 0.9);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- main -->
+    <main>
+        <main>
+            <div class="cover" id="cover">
+                <div class="cover_wrap">
+                    <div class="contents">
+                        <p>I dream my painting and I paint my dream.</p>
+                        <p>나는 나의 그림을 <em>꿈</em>꾸고, 내 <em>꿈</em>을 그린다.</p>
+                    </div>
+                </div>
+            </div>
+            <svg id="svg-mask">
+                <defs>
+                    <!-- <filter id="svg-mask--blur" x="0" y="0">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+                    </filter> -->
+                    <mask id="svg-mask--mask">
+                        <rect class="svg-mask--rect" fill="white" />
+                        <circle class="svg-mask--circle" cx="100" cy="100" r="30" fill="black" />
+                        <!-- filter="url(#svg-mask--blur)" -->
+                    </mask>
+                </defs>
+                <rect class="svg-mask--rect" mask="url(#svg-mask--mask)" />
+            </svg>
+        </main>
+    </main>
+    <!-- //main -->
+
+    <!-- info -->
+    <div class="info left">
+        <h1><a href="mouse00.html">Javascript Mouse Effect07</a></h1>
+        <p>마우스 방향에 따라 움직이기</p>
+    </div>
+
+    <div class="info right">
+        <ul>
+            <li>Mouse <a href="mouse01-jquery.html">1</a><a href="mouse01-javascript.html">1</a></li>
+            <li>Mouse <a href="mouse02-jquery.html">2</a><a href="mouse02-javascript.html">2</a></li>
+            <li>Mouse <a href="mouse03-jquery.html">3</a><a href="mouse03-javascript.html">3</a></li>
+            <li>Mouse <a href="mouse04-jquery.html">4</a><a href="mouse04-javascript.html">4</a></li>
+            <li>Mouse <a href="mouse05-jquery.html">5</a><a href="mouse05-javascript.html">5</a></li>
+            <li>Mouse <a href="mouse06-jquery.html">6</a><a href="mouse06-javascript.html">6</a></li>
+            <li class="active">Mouse <a href="mouse07-jquery.html">7</a><a href="mouse07-javascript.html">7</a></li>
+            <li>Mouse <a href="mouse08-jquery.html">8</a><a href="mouse08-javascript.html">8</a></li>
+            <li>Mouse <a href="mouse09-jquery.html">9</a><a href="mouse09-javascript.html">9</a></li>
+            <li>Mouse <a href="mouse10-jquery.html">10</a><a href="mouse10-javascript.html">10</a></li>
+        </ul>
+    </div>
+
+    <div class="info view">
+        <a href="https://wtss.tistory.com/363" target="_blank" class="view">소스보기</a>
+    </div>
+    <!-- //info -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script>
+        class MaskSVG {
+            constructor(obj){ // 클래스로 생성된 객체를 생성하고 초기화 하는 메서드 
+                this.el = document.body.querySelector('#svg-mask'); //el은 문서의 바디에 있는 id svg-maks
+                this.rect = document.body.querySelectorAll('.svg-mask--rect');
+                this.circle = document.body.querySelectorAll('.svg-mask--circle');
+                this.clicked = false;
+                this.init(); // 초기화의 의미를 지닌 함수나 객체 작성시 많이 사용
+            }
+
+            init(){
+                this.handleResize();
+                this.binds();
+                this.events();
+            }
+
+            binds(){
+                this.handleResize = this.handleResize.bind(this);
+                this.handleMouse = this.handleMouse.bind(this);
+                this.handleClick = this.handleClick.bind(this);
+            }
+
+            events(){
+                window.addEventListener('resize',this.handleResize);
+                window.addEventListener('mousemove',this.handleMouse);
+                window.addEventListener('touchmove',this.handleMouse);
+                window.addEventListener('click',this.handleClick);
+            }
+
+            handleMouse(e) {
+                gsap.to(this.circle, {
+                    duration: 0.7,
+                    cx: e.clientX || e.touches[0].clientX,
+                    cy: e.clientY || e.touches[0].clientY,
+                    ease: 'power2.out'
+                });
+            }
+
+            handleResize(){
+                this.minRadius = window.innerWidth * 0.1;
+                this.maxRadius = window.innerWidth * 1.1;
+
+                gsap.set([this.el, this.rect],{
+                    width: `${window.innerWidth}px`,
+                    height: `${window.innerHeight}px`
+                });
+
+                gsap.set(this.circle,{
+                    r: `${this.minRadius}px`
+                });
+            }
+
+            handleClick(){
+                this.clicked = !this.clicked;
+                gsap.to(this.circle,{
+                    duration: 1,
+                    r: this.clicked ? this.maxRadius : this.minRadius,
+                    ease: 'power3.inout'
+                })
+            }
+        }
+
+        new MaskSVG();
+    </script>
+</body>
+
+</html>
